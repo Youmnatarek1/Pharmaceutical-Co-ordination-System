@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Beating Spirit Pharmacy - Customers</title>
+  <style>
+    /* Add styling to the header */
+    header {
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #2B2D42;
+      color: #FFFFFF;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      color: #FFFFFF;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    nav a {
+      display: inline-block;
+      padding: 10px;
+      margin-left: 10px;
+      color: #FFFFFF;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #FFFFFF;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 8px;
+      border: 1px solid #ddd;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    input[type=text] {
+      padding: 6px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-bottom: 12px;
+      width: 100%;
+    }
+
+    /* Add styling to the active menu item */
+    .active {
+      background-color: #485b7d;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Beating Spirit Pharmacy</h1>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="requests.html">Requests</a>
+      <a href="orders.html">Orders</a>
+      <a href="Medicines.html">Medicines</a>
+      <a href="customers.html" class="active">Customers</a>
+      <a href="reports.html">Reports</a>
+      <a href="settings.html">Settings</a>
+    </nav>
+  </header>
+  <h2>Customers</h2>
+  <input type="text" id="search" placeholder="Search customers...">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Address</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Mohamed Maged</td>
+        <td>MohamedGohar@Gmail.com</td>
+        <td>1018290098</td>
+        <td>123 Main St, First Neighborhood, 6-October, Giza</td>
+      </tr>
+      <tr>
+        <td>Esraa Ahmed</td>
+        <td>EsraaAhmed@Gmail.com</td>
+        <td>1067298711</td>
+        <td>456 Oak St, Third Neighborhood, Sheikh Zayed, Giza</td>
+      </tr>
+      <!-- Add more rows as needed -->
+    </tbody>
+  </table>
+  <script>
+    // Get all the menu items
+    var menuItems = document.getElementsByTagName("nav")[0].getElementsByTagName("a");
+
+    // Add event listeners to all the menu items
+    for (var i = 0; i < menuItems.length; i++) {
+      menuItems[i].addEventListener("click", function() {
+        // Remove the active class from all the menu items
+        for (var j = 0; j < menuItems.length; j++) {
+          menuItems[j].classList.remove("active");
+        }
+
+        //Add the active class to the clicked menu item
+        this.classList.add("active");
+      });
+    }
+
+    // Get the search input field and all the table rows
+    var searchInput = document.getElementById("search");
+    var tableRows = document.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+    // Add event listener to the search input
+    searchInput.addEventListener("keyup", function() {
+      var query = this.value.toLowerCase();
+      for (var i = 0; i < tableRows.length; i++) {
+        var name = tableRows[i].getElementsByTagName("td")[0].textContent.toLowerCase();
+        var email = tableRows[i].getElementsByTagName("td")[1].textContent.toLowerCase();
+        var phone = tableRows[i].getElementsByTagName("td")[2].textContent.toLowerCase();
+        var address = tableRows[i].getElementsByTagName("td")[3].textContent.toLowerCase();
+        if (name.indexOf(query) > -1 || email.indexOf(query) > -1 ||phone.indexOf(query) > -1 || address.indexOf(query) > -1) {
+          tableRows[i].style.display = "";
+        } else {
+          tableRows[i].style.display = "none";
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pharmacy Management System - Requests</title>
+    <style>
+        /* Add styling to the header */
+        header {
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #2B2D42;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 28px;
+            color: #FFFFFF;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        nav a {
+            display: inline-block;
+            padding: 10px;
+            margin-left: 10px;
+            color: #FFFFFF;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #485b7d;
+        }
+
+        nav a.active {
+            background-color: #7a949b;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        input[type=text] {
+            padding: 6px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 12px;
+            width: 100%;
+        }
+
+        .button {
+            background-color: #7a949b;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #485b7d;
+        }
+
+        /* Hide the notes input and button by default */
+        .notes-div {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Beating Spirit Pharmacy</h1>
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="requests.html" class="active">Requests</a>
+        <a href="orders.html">Orders</a>
+        <a href="Medicines.html">Medicines</a>
+        <a href="customers.html">Customers</a>
+        <a href="reports.html">Reports</a>
+        <a href="settings.html">Settings</a>
+    </nav>
+</header>
+<h2>Requests</h2>
+<input type="text" id="search" placeholder="Search requests by patient id...">
+<table>
+    <thead>
+    <tr>
+        <th>Patient ID</th>
+        <th>Patient Name</th>
+        <th>Drug Name</th>
+        <th>Strength</th>
+        <th>Route Adm</th>
+        <th>Freq</th>
+        <th>Duration</th>
+        <th>Remarks</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="request-row">
+        <td>001</td>
+        <td>Rawan Alaa</td>
+        <td>Aspirin & Ramipril</td>
+        <td>500mg</td>
+        <td>Oral</td>
+        <td>Once daily</td>
+        <td>7 days</td>
+        <td>Take both with food</td>
+        <td>Pending</td>
+        <td>
+            <div class="approve-div">
+                <a href="#" class="button approve-button" id="approve-001">Approve</a>
+            </div>
+            <div class="reject-div">
+                <a href="#" class="button reject-button" id="reject-001">Reject</a>
+            </div>
+            <div class="fulfill-div">
+                <a href="#" class="button fulfill-button" id="fulfill-001">Fulfill</a>
+            </div>
+        </td>
+    </tr>
+    <tr class="request-row">
+        <td>002</td>
+        <td>Fatima Ahmed</td>
+        <td>Metformin</td>
+        <td>1000mg</td>
+        <td>Oral</td>
+        <td>Twice daily</td>
+        <td>30 days</td>
+        <td>No specialrequirements</td>
+        <td>Pending</td>
+        <td>
+            <div class="approve-div">
+                <a href="#" class="button approve-button" id="approve-002">Approve</a>
+            </div>
+            <div class="reject-div">
+                <a href="#" class="button reject-button" id="reject-002">Reject</a>
+            </div>
+            <div class="fulfill-div">
+                <a href="#" class="button fulfill-button" id="fulfill-002">Fulfill</a>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div class="notes-div">
+    <input type="text" id="notes" placeholder="Add notes...">
+    <a href="#" class="button save-notes-button">Save Notes</a>
+</div>
+<script>
+    // Get the search input and table rows
+    const searchInput = document.getElementById('search');
+    const requestRows = document.querySelectorAll('.request-row');
+
+    // Add event listener to search input
+    searchInput.addEventListener('keyup', function () {
+        const searchTerm = searchInput.value.toLowerCase();
+        requestRows.forEach(row => {
+            const patientId = row.querySelector('td:first-child').textContent.toLowerCase();
+            if (patientId.includes(searchTerm)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+
+    // Get the approve, reject, and fulfill buttons
+    const approveButtons = document.querySelectorAll('.approve-button');
+    const rejectButtons = document.querySelectorAll('.reject-button');
+    const fulfillButtons = document.querySelectorAll('.fulfill-button');
+
+    // Add event listener to approve buttons
+    approveButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const requestId = button.id.split('-')[1];
+            const requestRow = document.querySelector(`.request-row:nth-child(${requestId})`);
+            const statusCell = requestRow.querySelector('td:nth-child(9)');
+            statusCell.textContent = 'Approved';
+        });
+    });
+
+    // Add event listener to reject buttons
+    rejectButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const requestId = button.id.split('-')[1];
+            const requestRow = document.querySelector(`.request-row:nth-child(${requestId})`);
+            const statusCell = requestRow.querySelector('td:nth-child(9)');
+            statusCell.textContent = 'Rejected';
+            const notesDiv = requestRow.querySelector('.notes-div');
+            notesDiv.style.display = '';
+        });
+    });
+
+    // Add event listener to fulfill buttons
+    fulfillButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const requestId = button.id.split('-')[1];
+            const requestRow = document.querySelector(`.request-row:nth-child(${requestId})`);
+            const statusCell = requestRow.querySelector('td:nth-child(9)');
+            statusCell.textContent = 'Fulfilled';
+        });
+    });
+
+    // Get the save notes button
+    const saveNotesButton = document.querySelector('.save-notes-button');
+
+    // Add event listener to save notes button
+    saveNotesButton.addEventListener('click', function () {
+        const notesInput = document.querySelector('#notes');
+        const requestId = notesInput.closest('.request-row').querySelector('td:first-child').textContent;
+        const requestRow = document.querySelector(`.request-row:nth-child(${requestId})`);
+        const statusCell = requestRow.querySelector('td:nth-child(9)');
+        statusCell.textContent = 'Rejected (with notes)';
+        const notesDiv = requestRow.querySelector('.notes-div');
+        notesDiv.style.display = 'none';
+    });
+</script>
+</body>
+</html>

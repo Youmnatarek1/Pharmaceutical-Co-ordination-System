@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Beating Spirit Pharmacy - Orders</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: Arial, sans-serif;
+		}
+
+		.header {
+			background-color: #2B2D42;
+			color: #FFFFFF;
+			padding: 20px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		.logo {
+			font-size: 24px;
+			font-weight: bold;
+			margin: 0;
+			padding: 0;
+			text-transform: uppercase;
+		}
+
+		.menu {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.menu-item {
+			margin-right: 20px;
+			color: #FFFFFF;
+			font-size: 18px;
+			font-weight: bold;
+			cursor: pointer;
+			transition: all 0.3s ease-in-out;
+			word-spacing: 5px; /* Add space between each word */
+		}
+
+		.menu-item:hover {
+			transform: scale(1.1);
+		}
+
+		h1 {
+			font-size: 36px;
+			font-weight: bold;
+			margin: 20px;
+			text-align: center;
+		}
+
+		table {
+			border-collapse: collapse;
+			margin: 20px;
+			width: 100%;
+			max-width: 1200px;
+			background-color: #FFFFFF;
+			box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
+			border-radius: 10px;
+			overflow: hidden;
+		}
+
+		th, td {
+			padding: 10px;
+			text-align: left;
+			border-bottom: 1px solid #DDDDDD;
+		}
+
+		th {
+			background-color: #2B2D42;
+			color: #FFFFFF;
+		}
+
+		tr:hover {
+			background-color: #F2F2F2;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="header">
+		<h1 class="logo">Beating Spirit Pharmacy</h1>
+		<div class="menu">
+			<a href="dashboard.html" class="menu-item">Dashboard</a>
+			<a href="requests.html" class="menu-item">Requests</a>
+			<a href="orders.html" class="menu-item">Orders</a>
+			<a href="Medicines.html" class="menu-item">Medicines</a>
+			<a href="customers.html" class="menu-item">Customers</a>
+			<a href="reports.html" class="menu-item">Reports</a>
+			<a href="settings.html" class="menu-item">Settings</a>
+		</div>
+	</div>
+	<h1>Orders</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>Order ID</th>
+				<th>Customer Name</th>
+				<th>Order Date</th>
+				<th>Total Amount</th>
+				<th>Status</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>001</td>
+				<td>Mohamed Maged</td>
+				<td>June 20, 2023</td>
+				<td>E100</td>
+				<td>Processing</td>
+			</tr>
+			<tr>
+				<td>002</td>
+				<td>Omar Elsaid</td>
+				<td>June 21, 2023</td>
+				<td>E250</td>
+				<td>Shipped</td>
+			</tr>
+			<tr>
+				<td>003</td>
+				<td>Basma Galal</td>
+				<td>June 22, 2023</td>
+				<td>E75</td>
+				<td>Delivered</td>
+			</tr>
+			<tr>
+				<td>004</td>
+				<td>Dalia Atef</td>
+				<td>June 23, 2023</td>
+				<td>E50</td>
+				<td>Processing</td>
+			</tr>
+		</tbody>
+	</table>
+	
+</body>
+</html>

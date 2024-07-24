@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pharmacy Management System</title>
+	<style>
+		/* Add styling to the header */
+		header {
+			padding: 10px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			background-color: #2B2D42;
+			color: #FFFFFF;
+		}
+
+		h1 {
+			margin: 0;
+			font-size: 28px;
+			color: #FFFFFF;
+		}
+
+		nav {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: flex-end;
+			align-items: center;
+		}
+
+		nav a {
+			display: inline-block;
+			padding: 10px;
+			margin-left: 10px;
+			color: #FFFFFF;
+			font-weight: bold;
+			text-decoration: none;
+			cursor: pointer;
+		}
+
+		nav a:hover {
+			color: #FFFFFF;
+		}
+
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		th, td {
+			text-align: left;
+			padding: 8px;
+			border: 1px solid #ddd;
+		}
+
+		tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+
+		input[type=text] {
+			padding: 6px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+			margin-bottom: 12px;
+			width: 100%;
+		}
+
+		/* Add styling to the active menu item */
+		.active {
+			background-color: #485b7d;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<h1>Beating Spirit Pharmacy</h1>
+		<nav>
+			<a class="active" href="#">Dashboard</a>
+			<a href="requests.html">Requests</a>
+			<a href="orders.html">Orders</a>
+			<a href="Medicines.html">Medicines</a>
+			<a href="customers.html">Customers</a>
+			<a href="reports.html">Reports</a>
+			<a href="settings.html">Settings</a>
+		</nav>
+	</header>
+	<h2>Medicines</h2>
+	<input type="text" id="search" placeholder="Search Medicines...">
+	<table>
+		<thead>
+			<tr>
+				<th>Product Name</th>
+				<th>Description</th>
+				<th>Category</th>
+				<th>Price</th>
+				<th>Stock</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Aspirin</td>
+				<td>Pain reliever</td>
+				<td>Analgesics</td>
+				<td>E5.00</td>
+				<td>100</td>
+				<td>
+					<button onclick="editRow(this)">Edit</button>
+					<button onclick="deleteRow(this)">Delete</button>
+				</td>
+			</tr>
+			<tr>
+				<td>Amoxicillin</td>
+				<td>Antibiotic</td>
+				<td>Antibiotics</td>
+				<td>E10.00</td>
+				<td>50</td>
+				<td>
+					<button onclick="editRow(this)">Edit</button>
+					<button onclick="deleteRow(this)">Delete</button>
+				</td>
+			</tr>
+			<!-- Add more rows as needed -->
+		</tbody>
+	</table>
+	<script>
+		// Get all the menu items
+		var menuItems = document.getElementsByTagName("nav")[0].getElementsByTagName("a");
+
+		// Add event listeners to all the menu items
+		for (var i = 0; i < menuItems.length; i++) {
+			menuItems[i].addEventListener("click", function() {
+				// Remove the active class from all the menu items
+				for (var j = 0; j < menuItems.length; j++) {
+					menuItems[j].classList.remove("active");
+				}
+
+				// Add the active class to the clicked menu item
+				this.classList.add("active");
+			});
+		}
+
+		// Get the search input field and all the table rows
+		var searchInput = document.getElementById("search");
+		var tableRows = document.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+	// Add an event listener to the search input field to filter the table rows
+		searchInput.addEventListener("keyup", function() {
+			var filterText = this.value.toLowerCase();
+
+			// Loop through all the table rows and hide the ones that don't match the search query
+			for (var i = 0; i < tableRows.length; i++) {
+				var productName = tableRows[i].getElementsByTagName("td")[0].textContent.toLowerCase();
+				if (productName.indexOf(filterText) === -1) {
+					tableRows[i].style.display = "none";
+				} else {
+					tableRows[i].style.display = "";
+				}
+			}
+		});
+
+		// Define the editRow function to handle the edit button clicks
+		function editRow(button) {
+			// Get the table row that contains the clicked button
+			var row = button.parentNode.parentNode;
+
+			// Get the values of the row cells
+			var productName = row.getElementsByTagName("td")[0].textContent;
+			var description = row.getElementsByTagName("td")[1].textContent;
+			var category = row.getElementsByTagName("td")[2].textContent;
+			var price = row.getElementsByTagName("td")[3].textContent;
+			var stock = row.getElementsByTagName("td")[4].textContent;
+
+			// Prompt the user to enter new values for the row cells
+			var newProductName = prompt("Enter the new product name:", productName);
+			var newDescription = prompt("Enter the new description:", description);
+			var newCategory = prompt("Enter the new category:", category);
+			var newPrice = prompt("Enter the new price:", price);
+			var newStock = prompt("Enter the new stock:", stock);
+
+			// Update the row cells with the new values
+			row.getElementsByTagName("td")[0].textContent = newProductName;
+			row.getElementsByTagName("td")[1].textContent = newDescription;
+			row.getElementsByTagName("td")[2].textContent = newCategory;
+			row.getElementsByTagName("td")[3].textContent = newPrice;
+			row.getElementsByTagName("td")[4].textContent = newStock;
+		}
+
+		// Define the deleteRow function to handle the delete button clicks
+		function deleteRow(button) {
+			// Get the table row that contains the clicked button
+			var row = button.parentNode.parentNode;
+
+			// Remove the row from the table
+			row.parentNode.removeChild(row);
+		}
+	</script>
+</body>
+</html>
